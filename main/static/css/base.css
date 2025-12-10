@@ -1,0 +1,497 @@
+body{
+    font-family: 'Anek Bangla', sans-serif;
+    background: url(../img/фон1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+h2{
+    font-size: 32px;
+    color: rgba(26, 83, 92, 1);
+    font-family: 'Russo One', sans-serif;
+    margin-top: 130px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.form p{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 16px;
+}
+
+.baze-logo{
+    width: 168px;
+    height: 67px;
+    object-fit: contain;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    padding-top: 36px;
+}
+
+.header-list{
+    font-size: 20px;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.header-list a:hover {
+    color: #4b4a4a;
+}
+
+.header-container{
+    gap: 455px;
+}
+
+
+.logotip{
+    display: grid;
+    place-items: center;
+    padding-top: 150px;
+}
+
+.logo-img{
+    width: 346px;
+    object-fit: contain;
+    
+}
+
+.logotip p{
+    font-size: 16px;
+    color: rgba(24, 73, 80, 1);
+    padding-top: 10px;
+}
+
+.home-btns{
+    gap: 100px;
+    padding-top: 200px;
+    justify-content: center;
+}
+
+.home-btn{
+    width: 152px;
+    height: 105px;
+    object-fit: contain;
+    border-radius: 18px;
+}
+
+.pynto-home1{
+    justify-content: space-between;
+    padding-top: 300px;
+}
+
+.pytno1{
+    width: 303px;
+    height: 140px;
+    object-fit: contain;
+}
+
+.pytno2{
+    width: 119px;
+    height: 114px;
+    object-fit: contain;
+    margin-top: 70px;
+}
+
+.news-cards{
+    padding-top: 40px;
+    justify-content: center;
+}
+
+.news-cards img{
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+}
+
+
+.news-card{
+    background-color: white;
+    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 400px;
+    height: 108px;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.pynto-home2{
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+.pytno3{
+    width: 140px;
+    height: 116px;
+    object-fit: cover;
+}
+
+.pytno4{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.where-home h1{
+    font-size: 40px;
+    color: rgba(26, 83, 92, 1);
+    font-family: 'Russo One', sans-serif;
+    margin-top: 160px;
+}
+
+.where-home p{
+    font-size: 24px;
+    color: rgba(26, 83, 92, 1);
+    height: 362px;
+    
+}   
+
+.adress1{
+    background-image: url(../img/7.png);
+    background-repeat: no-repeat;
+    background-size: 797px 362px;
+    background-position: left center;
+    align-items: center;
+}
+
+.adress2{
+    background-image: url(../img/77.png);
+    background-repeat: no-repeat;
+    background-size: 797px 362px;
+    background-position: right center; /* картинка справа */
+    justify-content: flex-end; /* текст справа */
+    margin-left: auto; /* блок прижимается к правому краю */
+    align-items: center;
+}
+
+.logo-f{
+    width: 331px;
+    height: 331px;
+    border-radius: 50%;
+    margin-top: 38px;
+}
+
+.detail-image{
+    width: 490px;
+    object-fit: contain;
+}
+
+
+.p-detail{
+    margin-top: 70px;
+    padding-bottom: 100px;
+}
+
+.p-detail p{
+    margin-left: 112px;
+    font-size: 28px;
+    font-family: 'Anek Bangla', sans-serif;
+}
+
+.detail-img{
+    position: relative;
+    display: inline-block; 
+    margin-top: 152px;
+}
+
+
+
+.prev-btn, .next-btn {
+    color: rgba(26, 83, 92, 1);
+    font-family: 'Russo One', sans-serif;
+    border: none;
+    background: none;
+    padding: 10px;
+    font-size: 64px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    pointer-events: auto; 
+}
+
+.prev-btn {
+    margin-left: -60px; /* Выносим левую стрелку за пределы изображения */
+}
+
+.next-btn {
+    margin-right: -60px; /* Выносим правую стрелку за пределы изображения */
+}
+
+.prev-btn:hover, .next-btn:hover {
+    color: rgba(26, 83, 92, 0.8);
+    transform: scale(1.1);
+}
+
+.card-new-img{
+    width: 436px;
+    height: 272.5px;
+    object-fit: cover;
+}
+
+.items{
+    margin-top: 173px;
+}
+
+.item{
+    transition: background-color 0.5s ease;
+    width: 500px;
+}
+
+.item a{
+    font-size: 16px;
+    font-family: 'Anek Bangla', sans-serif;
+    padding: 10px;
+}
+
+.item p{
+    padding: 10px;
+    text-align: left;
+}
+
+.item:hover{
+    background-color: #e7e7e7; /* Светло-серый */
+    border-radius: 4px;
+}
+
+.pagination{
+    display: flex;
+    left: 46%;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.pagination a{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 20px;
+    color: rgba(26, 83, 92, 1);
+}
+
+.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.event-img{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 30px;
+    width: 540px; /* ← ТАКАЯ ЖЕ ШИРИНА КАК У ИЗОБРАЖЕНИЯ */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+.event-image{
+    width: 540px;
+    object-fit: cover;
+}
+
+.image-nav-event{
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    right: 0%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    pointer-events: none; 
+}
+
+.clubs{
+    margin-top: 100px;
+}
+
+.image-club{
+    width: 785px;
+    margin-bottom: 49px;
+}
+
+.club.reverse {
+    flex-direction: row-reverse;
+}
+
+.club-description{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.club-text{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 22px;
+    color: black;
+}
+
+.club-adress{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 18px;
+    color: rgba(26, 83, 92, 1);
+}
+
+.services{
+    margin-top: 100px;
+}
+
+.image-service{
+    width: 785px;
+    margin-bottom: 49px;
+}
+
+.service.reverse {
+    flex-direction: row-reverse;
+}
+
+.service-description{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.service-text{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 32px;
+    color: black;
+}
+
+.line{
+    width: 1100px;
+    border: 1px solid #000000;
+    margin: 20px auto
+}
+
+.dop{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 32px;
+    margin-top: 90px;
+    margin-bottom: 40px;
+}
+
+.zayvka{
+    margin-bottom: 90px;
+    text-align: center;
+}
+
+.zayvka a{
+    font-size: 40px;
+}
+
+.supports{
+    margin-top: 100px;
+}
+
+.image-support{
+    width: 785px;
+    margin-bottom: 49px;
+}
+
+.support.reverse {
+    flex-direction: row-reverse;
+}
+
+.support-description{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.support-text{
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 32px;
+    text-align: center;
+}
+
+.text-up{
+    margin-top: 60px;
+    font-size: 29px;
+    font-family: 'Anek Bangla', sans-serif;
+    text-align: center;
+}
+
+.center{
+    font-size: 32px;
+    font-family: 'Anek Bangla', sans-serif;
+    text-align: center;
+    color: rgba(26, 83, 92, 1);
+    margin-top: 60px;
+}
+
+.club-dop{
+    font-size: 24px;
+    font-family: 'Anek Bangla', sans-serif;
+    text-align: center;
+    color: rgba(26, 83, 92, 1);
+    width: 819px;
+    margin: 30px auto;
+}
+
+.line2{
+    width: 164px;
+    border: 2px solid #000000;
+    margin: 20px auto;
+}
+
+.star{
+    color: rgba(237, 44, 44, 1);
+}
+
+.btn-support{
+    width: 148px;
+    height: 50px;
+    background-color: rgba(26, 83, 92, 1);
+    color: white;
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 17px;
+    border-radius: 8px;
+    margin: 8px;
+}
+.error-message {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #fff5f5;
+}
+        
+.error-field {
+            border-color: #dc3545 !important;
+            background-color: #fff5f5;
+}
+        
+.error-field:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+        
+        /* Стили для чекбокса с ошибкой */
+.checkbox-error {
+            color: #dc3545;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #fff5f5;
+            display: inline-block;
+            margin-top: 5px;
+}
+        
+.checkbox-error label {
+            color: #dc3545;}
+        
+        /* Ограничение выбора даты в календаре */
+input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+}
+        
+        /* Стили для чекбокса */
+.form-check-input {
+            margin-right: 10px;
+            margin-top: 5px;
+}

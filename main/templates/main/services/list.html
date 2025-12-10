@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}ПЛАТНЫЕ УСЛУГИ{% endblock title %}
+
+{% block content %}
+    <h2>ПЛАТНЫЕ УСЛУГИ</h2>
+    <div class="services">
+        {% for service in services %}
+            {% if service.img %}
+                <div class="service {% if forloop.counter|divisibleby:2 %}reverse{% endif %} d-flex">
+                    <img src="{{ service.img.url }}" alt="{{ service.title }}" class="image-service">
+                    <div class="service-description">
+                        <p class="service-text">{{ service.description|linebreaksbr }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="line"></div>
+        <h5 class="dop">Дополнительно:</h5>
+        {% for service in services %}
+            {% if not service.img %}
+                <p class="service-text">{{ service.description|linebreaksbr }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div  class="zayvka">
+        <a href="https://vk.com/bazamc?from=groups&ref=group_menu&w=app5708398_-5418799"><h2>Заявка на платные услуги</h2></a>
+    </div>
+{% endblock content %}

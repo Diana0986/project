@@ -1,0 +1,465 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Заявка на инициативу{% endblock title %}
+
+{% block content %} 
+   <form method="post">
+        {% csrf_token %}
+        <h2>Личные данные</h2>
+        <p>
+            ФИО<span class="star">*</span><br>
+            {{ form.full_name }}
+        </p>
+        <p>
+            Дата рождения<span class="star">*</span><br>
+            {{ form.birth_date }}
+            {% if form.birth_date.errors %}
+                <div class="error-message">{{ form.birth_date.errors }}</div>
+            {% endif %}
+        </p>
+        <p>
+            Номер телефона<span class="star">*</span><br>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+                <div class="error-message">{{ form.phone.errors }}</div>
+            {% endif %}
+        </p>
+        <p>
+            Адрес электронной почты<span class="star">*</span><br>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error-message">{{ form.email.errors }}</div>
+            {% endif %}
+        </p>
+        <p>
+            Ссылка на социальную сеть ВКонтакте<span class="star">*</span><br>
+            {{ form.vk_link }}
+        </p>
+        <p>
+            Место работы/учёбы<span class="star">*</span><br>
+            {{ form.workplace }}
+        </p>
+        
+        <h2>Об инициативе</h2>
+        <p>
+            Название инициативы<span class="star">*</span><br>
+            {{ form.initiative_name }}
+        </p>
+        <p>
+            Цель инициативного предложения<span class="star">*</span><br>
+            {{ form.initiative_goal }}
+        </p>
+        <p>
+            Описание инициативного предложения<span class="star">*</span><br>
+            {{ form.initiative_description }}
+        </p>
+        
+        <h2>Организация</h2>
+        <p>
+            Формат инициативы<span class="star">*</span><br>
+            {{ form.initiative_format }}
+        </p>
+        <p id="other_format_details" style="display: none;">
+            Если вы выбрали в предыдущем вопросе вариант "Другое", распишите формат как можно подробно<br>
+            {{ form.other_format_details }}
+        </p>
+        <p>
+            Дата проведения инициативы<span class="star">*</span><br>
+            {{ form.initiative_date }}
+            {% if form.initiative_date.errors %}
+                <div class="error-message">{{ form.initiative_date.errors }}</div>
+            {% endif %}
+        </p>
+        <p>
+            Время проведения инициативы<span class="star">*</span><br>
+            {{ form.initiative_time }}
+        </p>
+        <p>
+            Предполагаемое количество участников<span class="star">*</span><br>
+            {{ form.expected_participants }}
+        </p>
+        <p>
+            Тип помещения<span class="star">*</span><br>
+            {{ form.room_type }}
+        </p>
+        <p>
+            Техническое оснащение инициативы<span class="star">*</span><br>
+            {{ form.technical_equipment }}
+        </p>
+        
+        <h2>Дополнительно</h2>
+        <p>
+            Комментарии:<span class="star">*</span><br>
+            {{ form.comments }}
+        </p>
+        <p>
+            {{ form.personal_data_agreement }}
+            Я даю своё согласие на обработку моих персональных данных, указанных в настоящей Анкете-заявлении в соответствии с правилами обработки персональных данных ММАУ “ИТ-центр” и с требованиями Федерального закона от 27.07.2006 №152-ФЗ “О персональных данных”<span class="star">*</span>
+            {% if form.personal_data_agreement.errors %}
+                <div class="error-message">{{ form.personal_data_agreement.errors }}</div>
+            {% endif %}
+        </p>
+        
+        <div>
+            <button class="btn-support" type="submit">Отправить</button>
+            <button class="btn-support" type="reset">Сбросить</button>
+        </div>
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Показ/скрытие поля "Другое"
+            var formatSelect = document.getElementById('id_initiative_format');
+            if (formatSelect) {
+                formatSelect.addEventListener('change', function() {
+                    var otherField = document.getElementById('other_format_details');
+                    if (otherField) {
+                        otherField.style.display = this.value === 'other' ? 'block' : 'none';
+                    }
+                });
+
+                var otherField = document.getElementById('other_format_details');
+                if (otherField) {
+                    otherField.style.display = formatSelect.value === 'other' ? 'block' : 'none';
+                }
+            }
+            
+            // Получаем элементы полей
+            var phoneInput = document.getElementById('id_phone');
+            var birthDateInput = document.getElementById('id_birth_date');
+            var emailInput = document.getElementById('id_email');
+            var initiativeDateInput = document.getElementById('id_initiative_date');
+            var agreementCheckbox = document.getElementById('id_personal_data_agreement');
+            var form = document.getElementById('initiativeForm');
+            
+            // Функция для расчета возраста
+            function calculateAge(birthDate) {
+                var today = new Date();
+                var birth = new Date(birthDate);
+                var age = today.getFullYear() - birth.getFullYear();
+                var monthDiff = today.getMonth() - birth.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+            
+            // Функция для проверки даты (не в прошлом)
+            function validateInitiativeDate(input) {
+                var value = input.value;
+                
+                if (!value) {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                    return true;
+                }
+                
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                var selectedDate = new Date(value);
+                
+                var isValid = selectedDate >= today;
+                
+                if (!isValid) {
+                    input.classList.add('error-field');
+                    input.title = 'Дата проведения инициативы не может быть в прошлом';
+                } else {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                }
+                
+                return isValid;
+            }
+            
+            // Функция для валидации email
+            function validateEmail(input) {
+                var value = input.value;
+                
+                if (!value.trim()) {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                    return true;
+                }
+                
+                var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                var isValid = emailRegex.test(value);
+                
+                if (!isValid) {
+                    input.classList.add('error-field');
+                    input.title = 'Введите корректный email адрес. Пример: example@mail.ru';
+                } else {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                }
+                
+                return isValid;
+            }
+            
+            // Функция для валидации даты рождения
+            function validateBirthDate(input) {
+                var value = input.value;
+                
+                if (!value) {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                    return true;
+                }
+                
+                var age = calculateAge(value);
+                var isValid = age >= 14 && age <= 35;
+                
+                if (!isValid) {
+                    input.classList.add('error-field');
+                    if (age < 14) {
+                        input.title = 'Возраст должен быть не менее 14 лет';
+                    } else if (age > 35) {
+                        input.title = 'Возраст должен быть не более 35 лет';
+                    }
+                } else {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                }
+                
+                return isValid;
+            }
+            
+            // Функция для валидации телефона
+            function validatePhoneNumber(input) {
+                var value = input.value;
+                
+                if (!value.trim()) {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                    return true;
+                }
+                
+                var cleaned = value.replace(/[^\d+]/g, '');
+                var isValid = cleaned.length === 12 && cleaned.startsWith('+7');
+                
+                if (!isValid) {
+                    input.classList.add('error-field');
+                    input.title = 'Номер должен быть в формате: +7 999 999 99 99 (12 символов)';
+                } else {
+                    input.classList.remove('error-field');
+                    input.title = '';
+                }
+                
+                return isValid;
+            }
+            
+            // Функция для валидации чекбокса
+            function validateAgreement(checkbox) {
+                if (!checkbox) return true;
+                
+                var isValid = checkbox.checked;
+                var label = checkbox.parentElement;
+                
+                if (!isValid) {
+                    label.classList.add('checkbox-error');
+                } else {
+                    label.classList.remove('checkbox-error');
+                }
+                
+                return isValid;
+            }
+            
+            // Обработчики для чекбокса
+            if (agreementCheckbox) {
+                agreementCheckbox.addEventListener('change', function() {
+                    validateAgreement(this);
+                });
+                
+                validateAgreement(agreementCheckbox);
+            }
+            
+            // Обработчики для даты инициативы
+            if (initiativeDateInput) {
+                initiativeDateInput.addEventListener('change', function() {
+                    validateInitiativeDate(this);
+                });
+                
+                initiativeDateInput.addEventListener('blur', function() {
+                    validateInitiativeDate(this);
+                });
+                
+                var today = new Date();
+                initiativeDateInput.min = today.toISOString().split('T')[0];
+                
+                validateInitiativeDate(initiativeDateInput);
+            }
+            
+            // Обработчики для email
+            if (emailInput) {
+                emailInput.addEventListener('input', function() {
+                    validateEmail(this);
+                });
+                
+                emailInput.addEventListener('blur', function() {
+                    validateEmail(this);
+                });
+                
+                validateEmail(emailInput);
+            }
+            
+            // Обработчики для даты рождения
+            if (birthDateInput) {
+                birthDateInput.addEventListener('change', function() {
+                    validateBirthDate(this);
+                });
+                
+                birthDateInput.addEventListener('blur', function() {
+                    validateBirthDate(this);
+                });
+                
+                var today = new Date();
+                var minDate = new Date();
+                var maxDate = new Date();
+                
+                minDate.setFullYear(today.getFullYear() - 35);
+                maxDate.setFullYear(today.getFullYear() - 14);
+                
+                birthDateInput.max = maxDate.toISOString().split('T')[0];
+                birthDateInput.min = minDate.toISOString().split('T')[0];
+                
+                validateBirthDate(birthDateInput);
+            }
+            
+            // Обработчики для телефона
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    var value = e.target.value;
+                    
+                    if (value === '7' || value === '8') {
+                        e.target.value = '+7';
+                    }
+                    
+                    validatePhoneNumber(e.target);
+                });
+                
+                phoneInput.addEventListener('blur', function() {
+                    validatePhoneNumber(this);
+                });
+                
+                validatePhoneNumber(phoneInput);
+            }
+            
+            // 3. Проверка перед отправкой формы
+            form.addEventListener('submit', function(e) {
+                var hasError = false;
+                var errorMessage = '';
+                
+                // Проверка телефона
+                if (phoneInput) {
+                    var phoneValue = phoneInput.value;
+                    if (phoneValue) {
+                        var cleaned = phoneValue.replace(/[^\d+]/g, '');
+                        if (cleaned.length !== 12 || !cleaned.startsWith('+7')) {
+                            hasError = true;
+                            errorMessage += '• Номер телефона должен содержать 11 цифр после +7 (всего 12 символов).<br>';
+                            phoneInput.classList.add('error-field');
+                        }
+                    }
+                }
+                
+                // Проверка даты рождения
+                if (birthDateInput) {
+                    var birthDateValue = birthDateInput.value;
+                    if (birthDateValue) {
+                        var age = calculateAge(birthDateValue);
+                        if (age < 14 || age > 35) {
+                            hasError = true;
+                            if (age < 14) {
+                                errorMessage += '• Возраст должен быть не менее 14 лет.<br>';
+                            } else if (age > 35) {
+                                errorMessage += '• Возраст должен быть не более 35 лет.<br>';
+                            }
+                            birthDateInput.classList.add('error-field');
+                        }
+                    }
+                }
+                
+                // Проверка email
+                if (emailInput) {
+                    var emailValue = emailInput.value;
+                    if (emailValue) {
+                        var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!emailRegex.test(emailValue)) {
+                            hasError = true;
+                            errorMessage += '• Введите корректный email адрес (например: example@mail.ru).<br>';
+                            emailInput.classList.add('error-field');
+                        }
+                    }
+                }
+                
+                // Проверка даты инициативы
+                if (initiativeDateInput) {
+                    var initiativeDateValue = initiativeDateInput.value;
+                    if (initiativeDateValue) {
+                        var today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        var selectedDate = new Date(initiativeDateValue);
+                        
+                        if (selectedDate < today) {
+                            hasError = true;
+                            errorMessage += '• Дата проведения инициативы не может быть в прошлом.<br>';
+                            initiativeDateInput.classList.add('error-field');
+                        }
+                    }
+                }
+                
+                // Проверка чекбокса согласия
+                if (agreementCheckbox && !agreementCheckbox.checked) {
+                    hasError = true;
+                    errorMessage += 'Необходимо дать согласие на обработку персональных данных.<br>';
+                    var label = agreementCheckbox.parentElement;
+                    label.classList.add('checkbox-error');
+                }
+                
+                if (hasError) {
+                    e.preventDefault();
+                    
+                    // Прокручиваем к первому полю с ошибкой
+                    var firstError = document.querySelector('.error-field, .checkbox-error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        // Если это чекбокс, фокусируемся на нем
+                        if (firstError.classList.contains('checkbox-error')) {
+                            agreementCheckbox.focus();
+                        }
+                    }
+                    
+                    // Показываем сообщение об ошибке
+                    Swal.fire({
+                        title: 'Ошибки в форме',
+                        html: 'Пожалуйста, исправьте следующие ошибки:<br><br>' + errorMessage,
+                        icon: 'error',
+                        confirmButtonText: 'Понятно',
+                        confirmButtonColor: 'rgba(26, 83, 92, 1)',
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                Swal.fire({
+                    title: 'Благодарим Вас за подачу заявки!',
+                    html: `{{ message|safe }}`,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: 'rgba(26, 83, 92, 1)',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                });
+            {% endfor %}
+        });
+    </script>
+    {% endif %}
+{% endblock content %}

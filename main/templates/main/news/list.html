@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}НОВОСТИ{% endblock title %}
+
+{% block content %}
+    <div class="llist">
+        <h2>НОВОСТИ НА БАЗЕ</h2>
+        <div class="main">
+                <div class="items d-flex">
+                    {% for new in news %}
+                        <div class="item">
+                            <a href="{{ new.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
+                                <img src="{% if new.main_image %}{{ new.main_image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" class="card-new-img" alt="">
+                                <p>{{ new.description|truncatechars:94 }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            <ul class="pagination">
+                <li class="{% if not news.has_previous %}disabled{% endif %}">
+                    <a href="{% if news.has_previous %}?page={{ news.previous_page_number }}{% endif %}">Назад</a>
+                </li>
+                {% for page in news.paginator.page_range %}
+                    {% if page >= news.number|add:-2 and page <= news.number|add:2 %}
+                        <li>
+                            <a href="?page={{ page }}" class="{% if news.number == page %}disabled{% endif %}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="{% if not news.has_next %}disabled{% endif %}">
+                    <a href="{% if news.has_next %}?page={{ news.next_page_number }}{% endif %}">Далее</a>
+                </li>
+            </ul>
+        </div>
+        <div class="mainvl"></div>
+    </div>
+{% endblock content %}

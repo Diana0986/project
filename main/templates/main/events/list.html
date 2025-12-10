@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}СОБЫТИЯ{% endblock title %}
+
+{% block content %}
+    <div>
+        <h2>СОБЫТИЯ НА БАЗЕ</h2>
+        <div class="event-img">
+            {% for image in events %}
+                <img class="event-image" src="{{ image.img.url }}" alt="" style="display: none;" data-index="{{ forloop.counter0 }}">
+            {% endfor %}
+            <div class="image-nav-event">
+                <button class="prev-btn">&lsaquo;</button>
+                <button class="next-btn">&rsaquo;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const images = document.querySelectorAll('.event-image');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentIndex = 0;
+
+        images[currentIndex].style.display = 'block';
+
+        if (images.length === 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        } else {
+            prevBtn.addEventListener('click', () => {
+                images[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                images[currentIndex].style.display = 'block';
+            });
+
+            nextBtn.addEventListener('click', () => {
+                images[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].style.display = 'block';
+            });
+        }
+    </script>
+    </div>
+{% endblock content %}

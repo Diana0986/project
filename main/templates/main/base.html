@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% comment %} bootstrap {% endcomment %} 
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    {% comment %} css {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header sticky-top">
+        <div class="header-container d-flex">
+            <div class="header-logo">
+                <a href="/"><img src="{% static 'img/лого.png' %}" alt="" class="baze-logo"></a>
+            </div>
+            <navbar class="header-nav pt-4">
+                <ul class="header-list d-flex">
+                    <li>
+                        <a href="/events" class="nav-a m-3">События</a>
+                    </li>
+                    <li>
+                        <a href="/news" class="nav-a m-3">Новости</a>
+                    </li>
+                    <li>
+                        <a href="/services" class="nav-a m-3">Платные услуги</a>
+                    </li>
+                    <li>
+                        <a href="/login" class="nav-a m-3">Вход/Регистрация</a>
+                    </li>
+                </ul>
+            </navbar>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <img src="{% static 'img/W_CYPmDZTYxAU_zalPwoM2pFu8iG-ebjzyKQaQ5oxT4O7htuL1MkRO5hA5-COj5QXWSYBa8qrRUEQtBRmdXJJD-e.jpg' %}" alt="">
+
+    {% comment %} js for boorstrap {% endcomment %}
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <footer style="background-color: #1A535C; color: white; padding: 0 580px; font-family: 'Anek Bangla', sans-serif; height: 499px;">
+        <div style="display: flex; justify-content: space-between;">
+            <div style="flex: 1;">
+                <img src="{% static 'img/темное_лого.jpg' %}" class="logo-f">
+            </div>
+            <div style="flex: 1;">
+                <h5 style="font-size: 26px; margin-top: 105px; margin-bottom: 1px;">Контакты</h5>
+                <p style="list-style: none; font-size: 16px; opacity: 0.8; margin-top: 0;">
+                    +7 (391) 291-33-16<br>
+                    <a href="it@kmforum.ru" style="color: white; text-decoration: none;">it@kmforum.ru</a><br>
+                    пр. им. газеты Красноярский Рабочий, 115А<br>
+                    <i class="bi bi-vk"></i>
+                    <a href="https://vk.com/bazamc?from=groups" style="color: white; text-decoration: none;">Молодёжный центр «БАЗА» | Красноярск</a> 
+                </p>
+            </div>
+            <div style="flex: 1;">
+                <h5 style="font-size: 26px; margin-top: 105px; margin-bottom: 1px;">Платные услуги</h5>
+                <p style="font-size: 16px; opacity: 0.8; margin-top: 0;">Ознакомьтесь с перечнем платных услуг нашего молодежного центра.</p>
+                <ul style="font-size: 13px; opacity: 0.8;">
+                    <li>Аренда паяльной мастерской</li>
+                    <li>Аренда конференц-зала</li>
+                    <li>Аренда фотостудии</li>
+                    <li>Мастер-класс по основам работы в ИТ сферах</li>
+                    <li>Видеосъемка</li>
+                    <li>Фотосъёмка</li>
+                    <li>Организация площадки виртуальной реальности</li>
+                    <li>Аренда звукового оборудования</li>
+                    <li>Аренда фотокамеры</li>
+                    <li>Проведение прямого эфира</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

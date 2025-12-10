@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock title %}
+
+{% block content %}
+    <section class="home d-flex flex-column">
+        <div class="logotip">
+            <img src="{% static 'img/лого-большое.png' %}" class="logo-img" alt="">
+            <p>Это команда, с которой можно делать по-настоящему.</p>
+        </div>
+        <div class="home-btns d-flex">
+            <a href="/events"><img src="{% static 'img/раздел1.jpg' %}" class="home-btn"></a>
+            <a href="/clubs"><img src="{% static 'img/раздел3.jpg' %}" class="home-btn"></a>
+            <a href="/supports"><img src="{% static 'img/раздел2.jpg' %}" class="home-btn"></a>     
+        </div>
+        <div class="home-new d-flex flex-column">
+            <div class="pynto-home1 d-flex">
+                <img src="{% static 'img/новое.png' %}" class="pytno1">
+                <img src="{% static 'img/пятна2.png' %}" class="pytno2">
+            </div>
+            <div class = "news-cards d-flex">
+                {% for new in news %}
+                    <a href="{{ new.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
+                        <img src="{% if new.main_image %}{{ new.main_image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" alt="">
+                        <div class="news-card d-flex">
+                            <p>{{ new.description|truncatechars:94 }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="pynto-home2 d-flex">
+                <img src="{% static 'img/пятна3.png' %}" class="pytno3">
+                <img src="{% static 'img/круги4.png' %}" class="pytno4">
+            </div>
+        </div>
+        <div class="where-home">
+            <h1>ЕСЛИ ТЕБЕ БЛИЗКО – ЗАХОДИ</h1>
+            <p class="adress1 d-flex">&ensp;ММАУ «ИТ-центр»<br>
+                &ensp;+7 (391) 291-33-16<br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;пр. им. газеты Красноярский Рабочий, 115А</p>
+            <p class="adress2 d-flex">ММАУ «ИТ-центр»&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+                +7 (391) 264-99-39&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ул. Глинки, 23</p> 
+        </div>
+    </section>
+
+{% endblock content %}

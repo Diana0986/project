@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}КЛУБЫ{% endblock title %}
+
+{% block content %}
+    <h2>КЛУБЫ НА БАЗЕ</h2>
+    <div class="clubs">
+        {% for club in clubs %}
+            <div class="club {% if forloop.counter|divisibleby:2 %}reverse{% endif %} d-flex">
+                <img src="{{ club.img.url }}" alt="{{ club.title }}" class="image-club">
+                <div class="club-description">
+                    <p class="club-text">{{ club.description|linebreaksbr }}</p>
+                    <p class="club-adress">{{ club.other|urlize|linebreaksbr }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="line2"></div>
+    <p class="club-dop">Участие во всех клубах и объединениях бесплатное и для аудитории<br>от 14 до 35 лет.<br>Количество мест ограничено!</p>
+    <div class="line2"></div>
+{% endblock content %}
