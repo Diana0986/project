@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+import os
+from django.views.static import serve
+from django.conf import settings
 
 app_name = 'main'
 
@@ -12,5 +15,5 @@ urlpatterns = [
     path('clubs/', views.clubs_list, name='clubs_list'),
     path('services/', views.services_list, name='services_list'),
     path('supports/', views.support_list, name='support_list'),
-    path('supports/initiative-form/', views.initiative_form, name='initiative_form'),
+    path('supports/initiative-form/', views.initiative_form, name='initiative_form')
 ]

@@ -1,0 +1,186 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}ПРОФИЛЬ{% endblock title %}
+
+{% block content %}
+    <div class="{% if request.user.is_superuser %}window-admin mx-auto{% else %}windowp{% endif %} bg-white p-4 mb-4 mx-2">
+        <form action="{% url "users:profile" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="box d-flex gap-4">
+                <div class="box1">
+                    <div class="img-profile col-md-12 mb-3">
+                        {% if user.image %}
+                            <img src="{{ user.image.url }}" alt="Avatar" class="img-avatar mx-auto d-block">
+                        {% else %}
+                            <img src="{% static 'img/noimage.jpg' %}" alt="Avatar" class="img-avatar mx-auto d-block">
+                        {% endif %}
+                        <input type="file" class="form-control form-styleimg mt-2" id="id_image"
+                            name="image" accept="image/*">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="id_username" class="profile-title"><strong>{{ user.username }}</strong></label>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="id_email" class="profile-title">{{ user.email }}</label>
+                    </div>
+                </div>
+            {% if not request.user.is_superuser %}
+                <div class="line1"></div>
+            {% endif %}
+                <div class="box2 d-flex flex-column gap-3">
+                {% if not request.user.is_superuser %}
+                    <h4>ПРОФИЛЬ</h4>
+                    <div class="d-flex gap-5">
+                        <div>
+                            <label for="id_first_name" class="profile-label">Имя</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="text-danger">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="id_last_name" class="profile-label">Фамилия</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="text-danger">{{ form.last_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="id_middle_name" class="profile-label">Отчество</label>
+                            {{ form.middle_name }}
+                            {% if form.middle_name.errors %}
+                                <div class="text-danger">{{ form.middle_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class=" d-flex flex-column gap-3">
+                        <div class="col-md-12">
+                            <label for="id_birthday" class="profile-label">Дата рождения</label>
+                            {{ form.birthday }}
+                            {% if form.birthday.errors %}
+                                <div class="text-danger">{{ form.birthday.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <label for="id_phone" class="profile-label">Номер телефона</label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                                <div class="text-danger">{{ form.phone.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <label for="id_link_vk" class="profile-label">Ссылка на ВК</label>
+                            {{ form.link_vk }}
+                            {% if form.link_vk.errors %}
+                                <div class="text-danger">{{ form.link_vk.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-12">
+                            <label for="id_link_tg" class="profile-label">Ссылка на Telegram</label>
+                            {{ form.link_tg }}
+                            {% if form.link_tg.errors %}
+                                <div class="text-danger">{{ form.link_tg.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        {% if not request.user.is_superuser %}
+            <div class="btns d-flex gap-4">
+                <button type="submit" class="profile-btn">Сохранить</button>
+                <button type="button" class="profile-logout" onclick="window.location.href='{% url "users:logout" %}'">Выход</button>
+            </div>
+            <div class="line3"></div>
+        {% else %}
+            <div class="btns d-flex flex-column gap-3">
+                <button type="button" class="profile-logout mx-auto mt-5" onclick="window.location.href='{% url "users:logout" %}'">Выход</button>
+                <button type="button" class="profile-adm mx-auto" onclick="window.location.href='{% url "users:admin_redirect" %}'">Панель управления</button>
+            </div>
+        {% endif %}
+                
+        </form>
+    {% if not request.user.is_superuser %}
+        <div class="support">
+            <h5 class="list-support">История созданных инициатив</h5>  
+            {% if zayvki %}
+                <ol>
+                    <div class="zayvki">
+                        {% for zayvka in zayvki %}
+                            <li>
+                                <p class="zayvka-title">{{ zayvka.initiative_name }} - <span>{{ zayvka.status }}</span></p>
+                            </li>
+                        {% endfor %}
+                    </ol> 
+            {% else %}
+                <p class="notsupport">Пусто</p>
+            {% endif %}         
+        </div>
+    {% endif %}
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Устанавливаем ограничения для поля даты рождения
+        const birthdayInput = document.getElementById('id_birthday');
+        
+        if (birthdayInput) {
+            // Рассчитываем даты
+            const today = new Date();
+            
+            // Минимальный возраст: 35 лет назад (максимальный возраст)
+            const minDate = new Date();
+            minDate.setFullYear(today.getFullYear() - 35);
+            
+            // Максимальный возраст: 14 лет назад (минимальный возраст)
+            const maxDate = new Date();
+            maxDate.setFullYear(today.getFullYear() - 14);
+            
+            // Форматируем даты в YYYY-MM-DD
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+            
+            // Устанавливаем атрибуты min и max
+            birthdayInput.min = formatDate(minDate);
+            birthdayInput.max = formatDate(maxDate);
+            
+            // Добавляем подсказку
+            birthdayInput.title = 'Выберите дату рождения (возраст от 14 до 35 лет)';
+            
+            // Валидация при изменении
+            birthdayInput.addEventListener('change', function() {
+                const selectedDate = new Date(this.value);
+                const age = today.getFullYear() - selectedDate.getFullYear();
+                
+                // Уточненная проверка возраста
+                const monthDiff = today.getMonth() - selectedDate.getMonth();
+                const dayDiff = today.getDate() - selectedDate.getDate();
+                const exactAge = (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) ? age - 1 : age;
+                
+                if (exactAge < 14 || exactAge > 35) {
+                    this.setCustomValidity('Возраст должен быть от 14 до 35 лет');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+        }
+        
+        // Добавляем стили к полям формы
+        const textInputs = document.querySelectorAll('#id_first_name, #id_last_name, #id_middle_name, #id_phone, #id_link_vk, #id_link_tg');
+        textInputs.forEach(input => {
+            input.classList.add('form-control', 'form-styleprofile');
+        });
+    });
+</script>
+{% endblock content %}

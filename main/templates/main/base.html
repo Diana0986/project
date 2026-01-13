@@ -16,12 +16,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Astloch:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header sticky-top">
+    <header class="header">
         <div class="header-container d-flex">
             <div class="header-logo">
                 <a href="/"><img src="{% static 'img/лого.png' %}" alt="" class="baze-logo"></a>
             </div>
-            <navbar class="header-nav pt-4">
+            
+            <!-- Кнопка гамбургера для мобильных -->
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <navbar class="header-nav pt-4" id="mainNav">
                 <ul class="header-list d-flex">
                     <li>
                         <a href="/events" class="nav-a m-3">События</a>
@@ -33,7 +41,11 @@
                         <a href="/services" class="nav-a m-3">Платные услуги</a>
                     </li>
                     <li>
-                        <a href="/login" class="nav-a m-3">Вход/Регистрация</a>
+                        {% if user.is_authenticated %}
+                            <a href={% url "users:profile" %} class="nav-a m-3">ПРОФИЛЬ</a>
+                        {% else %}
+                            <a href={% url "users:login" %} class="nav-a m-3">Вход/Регистрация</a>
+                        {% endif %}
                     </li>
                 </ul>
             </navbar>
@@ -47,6 +59,36 @@
 
     {% comment %} js for boorstrap {% endcomment %}
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    
+    <!-- Добавляем скрипт для мобильного меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            hamburgerBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                hamburgerBtn.classList.toggle('active');
+            });
+            
+            // Закрываем меню при клике на ссылку
+            const navLinks = document.querySelectorAll('.nav-a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('active');
+                    hamburgerBtn.classList.remove('active');
+                });
+            });
+            
+            // Закрываем меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    hamburgerBtn.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
     <footer style="background-color: #1A535C; color: white; padding: 0 580px; font-family: 'Anek Bangla', sans-serif; height: 499px;">
         <div style="display: flex; justify-content: space-between;">

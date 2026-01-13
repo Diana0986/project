@@ -121,15 +121,15 @@ class Zayvka(models.Model):
 
     room_type = models.CharField(max_length=50, choices=ROOM_TYPE_CHOICES, verbose_name="Тип помещения")
     technical_equipment = models.TextField(verbose_name="Техническое оснащение инициативы")
-    comments = models.TextField(verbose_name="Комментарии")
+    comments = models.TextField(verbose_name="Комментарии", null=True, blank=True)
     personal_data_agreement = models.BooleanField(verbose_name="Согласие на обработку персональных данных", default=False)
     status = models.CharField(max_length=20,
         choices=[
-            ('review', 'На рассмотрении'),
-            ('accepted', 'Принято'),
-            ('rejected', 'Отклонена'),
+            ('На рассмотрении', 'На рассмотрении'),
+            ('Принято', 'Принято'),
+            ('Отклонена', 'Отклонена'),
         ],
-        default='review', verbose_name="Статус заявки")
+        default='На рассмотрении', verbose_name="Статус заявки")
     
     created_at = models.DateTimeField(auto_now_add=True)
 

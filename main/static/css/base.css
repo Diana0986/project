@@ -1,16 +1,30 @@
-body{
+body {
     font-family: 'Anek Bangla', sans-serif;
     background: url(../img/фон1.png);
     background-repeat: no-repeat;
     background-size: cover;
-
+    background-attachment: fixed;
 }
 
-h2{
+h2 {
     font-size: 32px;
     color: rgba(26, 83, 92, 1);
     font-family: 'Russo One', sans-serif;
     margin-top: 130px;
+}
+
+h3 {
+    font-size: 40px;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    margin-top: 20px;
+}
+
+h4 {
+    font-size: 32px;
+    color: rgba(26, 83, 92, 1);
+    font-family: 'Russo One', sans-serif;
+    margin-top: 15px;
 }
 
 a {
@@ -18,189 +32,273 @@ a {
     color: #000;
 }
 
-.form p{
+.form p {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 16px;
 }
 
-.baze-logo{
+.baze-logo {
     width: 168px;
     height: 67px;
     object-fit: contain;
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     padding-top: 36px;
+    position: relative; /* Добавлено для гамбургера */
 }
 
-.header-list{
+.header-list {
     font-size: 20px;
     justify-content: space-between;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .header-list a:hover {
     color: #4b4a4a;
 }
 
-.header-container{
-    gap: 455px;
+.header-container {
+    display: flex;
+    align-items: center; /* Важно: выравниваем элементы по вертикали */
+    gap: 455px; 
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Ограничиваем максимальную ширину */
 }
 
+.header-logo {
+    position: absolute; /* Меняем на абсолютное позиционирование */
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+}
 
-.logotip{
+/* Стили для гамбургер-кнопки */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+    position: absolute; /* Меняем на абсолютное позиционирование */
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger-btn.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Анимация при наведении на гамбургер */
+.hamburger-btn:hover span {
+    background-color: #1A535C;
+}
+
+.logotip {
     display: grid;
     place-items: center;
     padding-top: 150px;
 }
 
-.logo-img{
+.logo-img {
     width: 346px;
+    max-width: 100%;
     object-fit: contain;
-    
 }
 
-.logotip p{
+.logotip p {
     font-size: 16px;
     color: rgba(24, 73, 80, 1);
     padding-top: 10px;
+    text-align: center;
 }
 
-.home-btns{
+.home-btns {
     gap: 100px;
     padding-top: 200px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-.home-btn{
+.home-btn {
     width: 152px;
     height: 105px;
     object-fit: contain;
     border-radius: 18px;
+    max-width: 100%;
 }
 
-.pynto-home1{
+.pynto-home1 {
     justify-content: space-between;
     padding-top: 300px;
+    flex-wrap: wrap;
 }
 
-.pytno1{
+.pytno1 {
     width: 303px;
     height: 140px;
     object-fit: contain;
+    max-width: 100%;
 }
 
-.pytno2{
+.pytno2 {
     width: 119px;
     height: 114px;
     object-fit: contain;
     margin-top: 70px;
+    max-width: 100%;
 }
 
-.news-cards{
+.news-cards {
     padding-top: 40px;
     justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.news-cards img{
+.news-cards img {
     width: 400px;
     height: 250px;
     object-fit: cover;
+    max-width: 100%;
 }
 
-
-.news-card{
+.news-card {
     background-color: white;
     box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.25);
     width: 400px;
-    height: 108px;
+    max-width: 100%;
+    height: auto;
+    min-height: 108px;
     align-items: center;
     padding: 10px;
+    margin: 0 auto;
 }
 
-
-.pynto-home2{
+.pynto-home2 {
     justify-content: space-between;
     padding-top: 30px;
+    flex-wrap: wrap;
 }
 
-.pytno3{
+.pytno3 {
     width: 140px;
     height: 116px;
     object-fit: cover;
+    max-width: 100%;
 }
 
-.pytno4{
+.pytno4 {
     width: 80px;
     height: 80px;
     object-fit: cover;
+    max-width: 100%;
 }
 
-.where-home h1{
+.where-home h1 {
     font-size: 40px;
     color: rgba(26, 83, 92, 1);
     font-family: 'Russo One', sans-serif;
     margin-top: 160px;
+    text-align: center;
 }
 
-.where-home p{
+.where-home p {
     font-size: 24px;
     color: rgba(26, 83, 92, 1);
-    height: 362px;
-    
-}   
+    height: auto;
+    padding: 20px;
+    text-align: center;
+}
 
-.adress1{
+.adress1 {
     background-image: url(../img/7.png);
     background-repeat: no-repeat;
-    background-size: 797px 362px;
+    background-size: contain;
     background-position: left center;
     align-items: center;
+    padding-left: 200px;
+    min-height: 362px;
 }
 
-.adress2{
+.adress2 {
     background-image: url(../img/77.png);
     background-repeat: no-repeat;
-    background-size: 797px 362px;
-    background-position: right center; /* картинка справа */
-    justify-content: flex-end; /* текст справа */
-    margin-left: auto; /* блок прижимается к правому краю */
+    background-size: contain;
+    background-position: right center;
+    justify-content: flex-end;
+    margin-left: auto;
     align-items: center;
+    padding-right: 200px;
+    min-height: 362px;
 }
 
-.logo-f{
+.logo-f {
     width: 331px;
     height: 331px;
+    max-width: 100%;
     border-radius: 50%;
     margin-top: 38px;
 }
 
-.detail-image{
+.detail-image {
     width: 490px;
+    max-width: 100%;
     object-fit: contain;
 }
 
-
-.p-detail{
+.p-detail {
     margin-top: 70px;
     padding-bottom: 100px;
 }
 
-.p-detail p{
-    margin-left: 112px;
+.p-detail p {
+    margin-left: 0;
     font-size: 28px;
     font-family: 'Anek Bangla', sans-serif;
+    padding: 0 20px;
+    text-align: center;
 }
 
-.detail-img{
+.detail-img {
     position: relative;
-    display: inline-block; 
+    display: inline-block;
     margin-top: 152px;
+    width: 100%;
+    text-align: center;
 }
-
-
 
 .prev-btn, .next-btn {
     color: rgba(26, 83, 92, 1);
@@ -211,62 +309,73 @@ header{
     font-size: 64px;
     cursor: pointer;
     transition: all 0.4s ease;
-    pointer-events: auto; 
+    pointer-events: auto;
 }
 
 .prev-btn {
-    margin-left: -60px; /* Выносим левую стрелку за пределы изображения */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .next-btn {
-    margin-right: -60px; /* Выносим правую стрелку за пределы изображения */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .prev-btn:hover, .next-btn:hover {
     color: rgba(26, 83, 92, 0.8);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.card-new-img{
+.card-new-img {
     width: 436px;
     height: 272.5px;
+    max-width: 100%;
     object-fit: cover;
 }
 
-.items{
+.items {
     margin-top: 173px;
 }
 
-.item{
+.item {
     transition: background-color 0.5s ease;
     width: 500px;
+    max-width: 100%;
+    margin: 0 auto 20px;
 }
 
-.item a{
+.item a {
     font-size: 16px;
     font-family: 'Anek Bangla', sans-serif;
     padding: 10px;
+    display: block;
 }
 
-.item p{
+.item p {
     padding: 10px;
     text-align: left;
+    margin: 0;
 }
 
-.item:hover{
-    background-color: #e7e7e7; /* Светло-серый */
+.item:hover {
+    background-color: #e7e7e7;
     border-radius: 4px;
 }
 
-.pagination{
+.pagination {
     display: flex;
-    left: 46%;
     gap: 15px;
     justify-content: center;
     margin-bottom: 80px;
+    flex-wrap: wrap;
 }
 
-.pagination a{
+.pagination a {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 20px;
     color: rgba(26, 83, 92, 1);
@@ -277,173 +386,184 @@ header{
     pointer-events: none;
 }
 
-.event-img{
+.event-img {
     display: flex;
     justify-content: center;
     position: relative;
-    margin-top: 30px;
-    width: 540px; /* ← ТАКАЯ ЖЕ ШИРИНА КАК У ИЗОБРАЖЕНИЯ */
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 100px;
+    margin: 30px auto 100px;
+    width: 100%;
+    max-width: 540px;
 }
 
-.event-image{
-    width: 540px;
+.event-image {
+    width: 100%;
+    max-width: 540px;
     object-fit: cover;
 }
 
-.image-nav-event{
+.image-nav-event {
     position: absolute;
     top: 50%;
-    left: 0%;
-    right: 0%;
+    left: 0;
+    right: 0;
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
-.clubs{
+.clubs {
     margin-top: 100px;
 }
 
-.image-club{
+.image-club {
     width: 785px;
+    max-width: 100%;
     margin-bottom: 49px;
 }
 
 .club.reverse {
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
 }
 
-.club-description{
+.club-description {
     display: grid;
     place-items: center;
     padding: 20px;
+    text-align: center;
 }
 
-.club-text{
+.club-text {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 22px;
     color: black;
 }
 
-.club-adress{
+.club-adress {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 18px;
     color: rgba(26, 83, 92, 1);
 }
 
-.services{
+.services {
     margin-top: 100px;
 }
 
-.image-service{
+.image-service {
     width: 785px;
+    max-width: 100%;
     margin-bottom: 49px;
 }
 
 .service.reverse {
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
 }
 
-.service-description{
+.service-description {
     display: grid;
     place-items: center;
     padding: 20px;
+    text-align: center;
 }
 
-.service-text{
+.service-text {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 32px;
     color: black;
 }
 
-.line{
-    width: 1100px;
+.line {
+    width: 90%;
+    max-width: 1100px;
     border: 1px solid #000000;
-    margin: 20px auto
+    margin: 20px auto;
 }
 
-.dop{
+.dop {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 32px;
     margin-top: 90px;
     margin-bottom: 40px;
+    text-align: center;
 }
 
-.zayvka{
+.zayvka {
     margin-bottom: 90px;
     text-align: center;
 }
 
-.zayvka a{
+.zayvka a {
     font-size: 40px;
 }
 
-.supports{
+.supports {
     margin-top: 100px;
 }
 
-.image-support{
+.image-support {
     width: 785px;
+    max-width: 100%;
     margin-bottom: 49px;
 }
 
 .support.reverse {
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
 }
 
-.support-description{
+.support-description {
     display: grid;
     place-items: center;
     padding: 20px;
+    text-align: center;
 }
 
-.support-text{
+.support-text {
     font-family: 'Anek Bangla', sans-serif;
     font-size: 32px;
     text-align: center;
 }
 
-.text-up{
+.text-up {
     margin-top: 60px;
     font-size: 29px;
     font-family: 'Anek Bangla', sans-serif;
     text-align: center;
+    padding: 0 20px;
 }
 
-.center{
+.center {
     font-size: 32px;
     font-family: 'Anek Bangla', sans-serif;
     text-align: center;
     color: rgba(26, 83, 92, 1);
     margin-top: 60px;
+    padding: 0 20px;
 }
 
-.club-dop{
+.club-dop {
     font-size: 24px;
     font-family: 'Anek Bangla', sans-serif;
     text-align: center;
     color: rgba(26, 83, 92, 1);
-    width: 819px;
+    width: 90%;
+    max-width: 819px;
     margin: 30px auto;
+    padding: 0 20px;
 }
 
-.line2{
+.line2 {
     width: 164px;
     border: 2px solid #000000;
     margin: 20px auto;
 }
 
-.star{
+.star {
     color: rgba(237, 44, 44, 1);
 }
 
-.btn-support{
+.btn-support {
     width: 148px;
     height: 50px;
     background-color: rgba(26, 83, 92, 1);
@@ -452,46 +572,615 @@ header{
     font-size: 17px;
     border-radius: 8px;
     margin: 8px;
+    border: none;
+    cursor: pointer;
 }
+
 .error-message {
-            color: #dc3545;
-            font-size: 0.875em;
-            margin-top: 0.25rem;
-            padding: 5px;
-            border-radius: 4px;
-            background-color: #fff5f5;
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #fff5f5;
 }
-        
+
 .error-field {
-            border-color: #dc3545 !important;
-            background-color: #fff5f5;
+    border-color: #dc3545 !important;
+    background-color: #fff5f5;
 }
-        
+
 .error-field:focus {
-            border-color: #dc3545;
-            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
-        
-        /* Стили для чекбокса с ошибкой */
+
 .checkbox-error {
-            color: #dc3545;
-            border-radius: 4px;
-            padding: 10px;
-            background-color: #fff5f5;
-            display: inline-block;
-            margin-top: 5px;
+    color: #dc3545;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #fff5f5;
+    display: inline-block;
+    margin-top: 5px;
 }
-        
+
 .checkbox-error label {
-            color: #dc3545;}
-        
-        /* Ограничение выбора даты в календаре */
-input[type="date"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
+    color: #dc3545;
 }
-        
-        /* Стили для чекбокса */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
 .form-check-input {
-            margin-right: 10px;
-            margin-top: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.login {
+    height: auto;
+    min-height: 620px;
+    width: 90%;
+    max-width: 700px;
+    background: linear-gradient(180deg, #1A535C 4.33%, #E3EAEB 100%);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 98px;
+    display: grid;
+    place-items: center;
+    margin: 100px auto;
+    padding: 40px 20px;
+}
+
+.alert {
+    color: #1A535C;
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 13px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.form-label {
+    color: white;
+    font-family: 'Anek Bangla', sans-serif;
+}
+
+.login-btn {
+    width: 294px;
+    max-width: 100%;
+    height: 40px;
+    background-color: #1A535C;
+    color: white;
+    font-family: 'Anek Bangla', sans-serif;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.log a {
+    color: #1A535C;
+    font-family: 'Anek Bangla', sans-serif;
+    font-size: 17px;
+    text-align: center;
+    display: block;
+}
+
+.windowp {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    margin: 60px auto;
+    width: 90%;
+    max-width: 1265px;
+    height: auto;
+    min-height: 823px;
+    padding: 20px;
+}
+
+.window-admin {
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    margin: 60px auto;
+    width: 90%;
+    max-width: 300px;
+    height: auto;
+    min-height: 550px;
+    padding: 20px;
+}
+
+.form-styleprofile {
+    width: 100%;
+    max-width: 250px;
+}
+
+.form-styleimg {
+    width: 100%;
+    max-width: 245px;
+    font-size: 13px;
+}
+
+.line1 {
+    height: auto;
+    min-height: 530px;
+    width: 1px;
+    opacity: 0.6;
+    border: 1px solid #B3B3B3;
+    margin: -24px auto;
+}
+
+.line3 {
+    width: 100%;
+    height: 1px;
+    opacity: 0.6;
+    border: 1px solid #B3B3B3;
+    margin: 10px 0;
+}
+
+.btns {
+    justify-content: center;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profile-btn {
+    width: 150px;
+    height: 45px;
+    background-color: #1A535C;
+    color: white;
+    font-size: 16px;
+    font-family: 'Anek Bangla', sans-serif;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.profile-logout {
+    width: 150px;
+    height: 45px;
+    background-color: #1A535C;
+    color: white;
+    font-size: 16px;
+    font-family: 'Anek Bangla', sans-serif;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.profile-adm {
+    width: 150px;
+    height: 50px;
+    background-color: #1A535C;
+    color: white;
+    font-size: 16px;
+    font-family: 'Anek Bangla', sans-serif;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.list-support {
+    font-size: 22px;
+    font-family: 'Russo One', sans-serif;
+    color: rgba(26, 83, 92, 1);
+    margin-top: 20px;
+    text-align: center;
+}
+
+.notsupport {
+    font-size: 20px;
+    font-family: 'Anek Bangla', sans-serif;
+    color: rgba(26, 83, 92, 1);
+    display: grid;
+    place-items: center;
+    height: 200px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.img-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    max-width: 150px;
+    max-height: 150px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    display: block;
+}
+
+.profile-title {
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-size: 20px;
+}
+
+/* Адаптивные медиазапросы */
+
+/* Для планшетов (768px - 1024px) */
+@media (max-width: 1024px) {
+    .header-container {
+        gap: 200px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .header-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .header-list li {
+        margin: 5px;
+    }
+    
+    .home-btns {
+        padding-top: 100px;
+        gap: 50px;
+    }
+    
+    .adress1, .adress2 {
+        padding-left: 150px;
+        padding-right: 150px;
+        background-size: cover;
+    }
+    
+    .image-club, .image-service, .image-support {
+        width: 100%;
+    }
+    
+    .club.reverse, .service.reverse, .support.reverse {
+        flex-direction: column;
+    }
+    
+    footer {
+        padding: 0 20px !important;
+        height: auto !important;
+    }
+    
+    .logo-f {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Для мобильных устройств (до 768px) */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 28px;
+        margin-top: 80px;
+    }
+    
+    h3 {
+        font-size: 32px;
+    }
+    
+    h4 {
+        font-size: 24px;
+    }
+
+    .header-container {
+        position: relative;
+        gap: 0;
+        justify-content: center;
+        padding: 10px 15px;
+        height: 80px; /* Фиксированная высота для header */
+    }
+
+    .hamburger-btn {
+        display: flex;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .header-nav {
+        position: fixed; /* Меняем на fixed для лучшего отображения на мобильных */
+        top: 80px; /* Начинаем сразу под header */
+        left: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px !important;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+    
+    .header-nav.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .header-list {
+        font-size: 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .header-list li {
+        margin: 10px 0 !important;
+        width: 100%;
+    }
+    
+    .nav-a {
+        display: block;
+        padding: 12px 0 !important;
+        margin: 0 !important;
+        border-bottom: 1px solid #f0f0f0;
+        width: 100%;
+        font-size: 18px;
+    }
+    
+    .header-list li:last-child .nav-a {
+        border-bottom: none;
+    }
+    
+    .header-list a:hover {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+    }
+    
+    .header-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .baze-logo {
+        width: 120px;
+        height: auto;
+        margin: 0 auto;
+    }
+    
+    .logotip {
+        padding-top: 80px;
+    }
+    
+    .logo-img {
+        width: 250px;
+    }
+    
+    .home-btns {
+        padding-top: 80px;
+        gap: 30px;
+    }
+    
+    .home-btn {
+        width: 120px;
+        height: 85px;
+    }
+    
+    .pynto-home1 {
+        padding-top: 150px;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .where-home h1 {
+        font-size: 32px;
+        margin-top: 80px;
+    }
+    
+    .where-home p {
+        font-size: 18px;
+    }
+    
+    .adress1, .adress2 {
+        padding: 20px;
+        background-image: none;
+        min-height: auto;
+        text-align: center;
+    }
+    
+    .detail-img {
+        margin-top: 80px;
+    }
+    
+    .prev-btn, .next-btn {
+        font-size: 40px;
+        padding: 5px;
+    }
+    
+    .items {
+        margin-top: 80px;
+    }
+    
+    .item {
+        width: 90%;
+    }
+    
+    .service-text, .support-text, .club-text {
+        font-size: 24px;
+    }
+    
+    .center {
+        font-size: 24px;
+    }
+    
+    .club-dop {
+        font-size: 18px;
+    }
+    
+    .zayvka a {
+        font-size: 28px;
+    }
+    
+    .login {
+        border-radius: 50px;
+        padding: 30px 15px;
+    }
+    
+    .windowp, .window-admin {
+        border-radius: 20px;
+    }
+    
+    footer > div {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    footer h5 {
+        margin-top: 40px !important;
+    }
+    .pt-4 {
+        padding-top: 0 !important;
+    }
+}
+
+/* Для очень маленьких экранов (до 480px) */
+@media (max-width: 480px) {
+    h2 {
+        font-size: 24px;
+    }
+    
+    h3 {
+        font-size: 24px;
+    }
+
+    .header-container {
+        height: 70px;
+        padding: 10px;
+    }
+
+    .header-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .header-list {
+        font-size: 14px;
+    }
+    
+    .baze-logo {
+        width: 100px;
+        height: auto;
+    }
+
+    .hamburger-btn {
+        right: 10px;
+        width: 25px;
+        height: 20px;
+    }
+    
+    .hamburger-btn span {
+        height: 2px;
+    }
+    
+    .header-nav {
+        top: 70px;
+        max-height: calc(100vh - 70px);
+    }
+
+    .nav-a {
+        font-size: 16px !important;
+        padding: 10px 0 !important;
+    }
+    
+    .home-btn {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .news-cards img {
+        height: 200px;
+    }
+    
+    .news-card {
+        width: 100%;
+    }
+    
+    .prev-btn, .next-btn {
+        font-size: 32px;
+    }
+    
+    .p-detail p {
+        font-size: 20px;
+    }
+    
+    .service-text, .support-text, .club-text {
+        font-size: 20px;
+    }
+    
+    .btn-support {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .profile-btn, .profile-logout, .profile-adm {
+        width: 130px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .login-btn {
+        width: 100%;
+    }
+}
+
+/* Для планшетов (чтобы меню не перекрывало контент) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .header-container {
+        gap: 200px;
+        justify-content: center;
+    }
+
+    .hamburger-btn {
+        display: none; /* Скрываем гамбургер на планшетах */
+    }
+    
+    .header-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .nav-a {
+        margin: 0 10px !important;
+        font-size: 16px;
+    }
+}
+
+/* Для больших экранов (более 1200px) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Для горизонтальной ориентации на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .logotip {
+        padding-top: 50px;
+    }
+    
+    .home-btns {
+        padding-top: 50px;
+    }
+    
+    .login {
+        min-height: 400px;
+        margin: 50px auto;
+    }
 }

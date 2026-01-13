@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock title %}
+
+{% block content %}
+    <section class="login">
+        <h3>Создать аккаунт</h3>
+        <form action="{% url "users:registration" %}" method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div>
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Логин</label>
+                    <input type="text" class="form-control" id="id_username"
+                    name="username"  required>
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">
+                            {{ form.password1.errors }}
+                        </div>
+                    п{% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label form-stylereg">Email</label>
+                    <input type="email" class="form-control form-stylereg" id="id_email"
+                    value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
+                    name="email" required>
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="id_password1" class="form-label form-stylereg">Пароль</label>
+                    <input type="password" class="form-control form-stylereg" id="id_password1"
+                    name="password1" required>
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <label for="id_password2" class="form-label">Повторите пароль</label>
+                    <input type="password" class="form-control" id="id_password2"
+                    name="password2" required>
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <button type="submit" class="login-btn ">Зарегестрироваться</button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </section>
+{% endblock content %}

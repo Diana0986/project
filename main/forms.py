@@ -6,8 +6,12 @@ from django.utils import timezone
 from .models import Zayvka
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError as DjangoValidationError
+from django.contrib.auth.forms import UserChangeForm
 
 class ZayvkaForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['comments'].required = False
     class Meta:
         model = Zayvka
         fields = '__all__'
