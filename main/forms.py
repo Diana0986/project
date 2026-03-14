@@ -12,6 +12,8 @@ class ZayvkaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['comments'].required = False
+        self.fields['email'].validators = []
+        self.fields['email'].error_messages = {}
     class Meta:
         model = Zayvka
         fields = '__all__'

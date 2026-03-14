@@ -14,7 +14,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="box d-flex gap-4">
+            <div class="{% if request.user.is_superuser %}box d-flex {% else %} box d-flex gap-4 {% endif %}">
                 <div class="box1">
                     <div class="img-profile col-md-12 mb-3">
                         {% if user.image %}
@@ -37,8 +37,8 @@
             {% endif %}
                 <div class="box2 d-flex flex-column gap-3">
                 {% if not request.user.is_superuser %}
-                    <h4>ПРОФИЛЬ</h4>
-                    <div class="d-flex gap-5">
+                    <h4 class="profile">ПРОФИЛЬ</h4>
+                    <div class="fio d-flex gap-5">
                         <div>
                             <label for="id_first_name" class="profile-label">Имя</label>
                             {{ form.first_name }}
@@ -103,7 +103,7 @@
         {% else %}
             <div class="btns d-flex flex-column gap-3">
                 <button type="button" class="profile-logout mx-auto mt-5" onclick="window.location.href='{% url "users:logout" %}'">Выход</button>
-                <button type="button" class="profile-adm mx-auto" onclick="window.location.href='{% url "users:admin_redirect" %}'">Панель управления</button>
+                <button type="button" class="profile-adm mx-auto" onclick="window.location.href='/admin'">Панель управления</button>
             </div>
         {% endif %}
                 

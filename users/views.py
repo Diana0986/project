@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from .forms import UserLoginForm, UserRegistrationForm, \
     ProfileForm
 from main.models import Zayvka 
-from django.contrib.auth.decorators import login_required, user_passes_test
-import logging
+from django.contrib.auth.decorators import login_required
+
 
 def login(request):
     if request.method == 'POST':
@@ -81,13 +81,3 @@ def profile(request):
 def logout(request):
     auth.logout(request)
     return redirect(reverse('main:popular_list'))
-
-logger = logging.getLogger('security')
-
-def is_superuser(user):
-    return user.is_authenticated and user.is_superuser
-
-@user_passes_test(is_superuser)
-def admin_redirect(request):
-    logger.info(f"Superuser {request.user} accessed admin via secure redirect")
-    return redirect('/my-super-secret-admin-panel/')

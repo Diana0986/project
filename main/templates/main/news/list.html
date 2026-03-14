@@ -7,16 +7,16 @@
     <div class="llist">
         <h2>НОВОСТИ НА БАЗЕ</h2>
         <div class="main">
-                <div class="items d-flex">
-                    {% for new in news %}
-                        <div class="item">
-                            <a href="{{ new.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
-                                <img src="{% if new.main_image %}{{ new.main_image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" class="card-new-img" alt="">
-                                <p>{{ new.description|truncatechars:94 }}</p>
-                            </a>
+            <div class="items d-flex">
+                {% for new in news %}
+                    <a href="{{ new.get_absolute_url }}" class="home-card d-flex flex-column align-items-center text-center">
+                        <img src="{% if new.main_image %}{{ new.main_image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" class="card-new-img" alt="">
+                        <div class="news-card d-flex">
+                            <p>{{ new.description|truncatechars:94 }}</p>
                         </div>
-                    {% endfor %}
-                </div>
+                     </a>
+                {% endfor %}
+            </div>
             <ul class="pagination">
                 <li class="{% if not news.has_previous %}disabled{% endif %}">
                     <a href="{% if news.has_previous %}?page={{ news.previous_page_number }}{% endif %}">Назад</a>
@@ -36,3 +36,4 @@
         <div class="mainvl"></div>
     </div>
 {% endblock content %}
+

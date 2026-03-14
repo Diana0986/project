@@ -84,7 +84,9 @@ def initiative_form(request):
     if request.method == 'POST':
         form = ZayvkaForm(request.POST, initial=initial_data)
         if form.is_valid():
-            proposal = form.save()
+            proposal = form.save(commit=False)
+            proposal.id = None  # ← ЭТО РЕШАЕТ ПРОБЛЕМУ
+            proposal.save()
             messages.success(
                 request, 
                 f'Предложение "{proposal.initiative_name}" отправлено!'
